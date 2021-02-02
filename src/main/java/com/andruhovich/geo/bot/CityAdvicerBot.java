@@ -1,5 +1,8 @@
 package com.andruhovich.geo.bot;
 
+import com.andruhovich.geo.model.City;
+import com.andruhovich.geo.service.CityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -18,6 +21,13 @@ public class CityAdvicerBot extends TelegramLongPollingBot {
   @Value("${telegrambot.botToken}")
   private String botToken;
 
+  private final CityService cityService;
+
+  @Autowired
+  public CityAdvicerBot(CityService cityService) {
+    this.cityService = cityService;
+  }
+
   @Override
   public String getBotUsername() {
     return botUsername;
@@ -33,7 +43,8 @@ public class CityAdvicerBot extends TelegramLongPollingBot {
     if (update.getMessage() != null && update.getMessage().hasText()) {
       Long chat_id = update.getMessage().getChatId();
       try {
-        execute(new SendMessage(chat_id.toString(), "Hi " + update.getMessage().getText()));
+        City city = cityService.getCity(update.getMessage().getText());
+        execute(new SendMessage(chat_id.toString(), city.getCityDescription()));
       } catch (TelegramApiException e) {
         e.printStackTrace();
       }

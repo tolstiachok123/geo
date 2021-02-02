@@ -12,4 +12,6 @@ public interface CityService {
 
   void deleteCity(String cityName);
 
+  City getCity(String cityName);
+
 }
