@@ -26,4 +26,9 @@ public class CityServiceImpl implements CityService {
     cityToUpdate.setCityDescription(city.getCityDescription());
     cityRepository.save(cityToUpdate);
   }
+
+  @Override
+  public void deleteCity(String cityName){
+    cityRepository.deleteByCityName(cityName);
+  }
 }

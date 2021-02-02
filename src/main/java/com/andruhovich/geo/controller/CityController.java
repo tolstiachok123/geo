@@ -21,4 +21,9 @@ public class CityController {
   public void updateCity(@RequestBody City city) {
     cityService.updateCity(city);
   }
+
+  @DeleteMapping(value = "/{cityName}")
+  public void deleteCity(@PathVariable(name = "cityName") String cityName) {
+    cityService.deleteCity(cityName);
+  }
 }
