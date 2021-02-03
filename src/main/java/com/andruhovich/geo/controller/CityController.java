@@ -17,9 +17,9 @@ public class CityController {
     cityService.addCity(city);
   }
 
-  @PostMapping
-  public void updateCityDescription(@RequestBody City city) {
-    cityService.updateCityDescription(city);
+  @PostMapping(value = "/{newCityName}")
+  public void updateCity(@PathVariable(name = "newCityName") String newCityName, @RequestBody City city) {
+    cityService.updateCity(newCityName, city);
   }
 
   @DeleteMapping(value = "/{cityName}")

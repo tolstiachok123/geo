@@ -22,10 +22,17 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
-  public void updateCityDescription(City city) {
+  public void updateCity(String newCityName, City city) {
+    newCityName = nameCorrect(newCityName);
     city.setCityName(nameCorrect(city.getCityName()));
     City cityToUpdate = cityRepository.getByCityName(city.getCityName());
-    cityToUpdate.setCityDescription(city.getCityDescription());
+    if (newCityName != null && !newCityName.equals(city.getCityName())) {
+      cityToUpdate.setCityName(newCityName);
+      cityToUpdate.setCityDescription(city.getCityDescription());
+      deleteCity(city.getCityName());
+    } else {
+      cityToUpdate.setCityDescription(city.getCityDescription());
+    }
     cityRepository.saveAndFlush(cityToUpdate);
   }
 
