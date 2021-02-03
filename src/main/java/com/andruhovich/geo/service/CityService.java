@@ -8,7 +8,7 @@ public interface CityService {
 
   void addCity(City city);
 
-  void updateCity(City city);
+  void updateCityDescription(City city);
 
   void deleteCity(String cityName);
 

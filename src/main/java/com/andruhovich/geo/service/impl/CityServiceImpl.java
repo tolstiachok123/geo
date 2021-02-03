@@ -3,6 +3,7 @@ package com.andruhovich.geo.service.impl;
 import com.andruhovich.geo.model.City;
 import com.andruhovich.geo.repository.CityRepository;
 import com.andruhovich.geo.service.CityService;
+import com.sun.xml.internal.ws.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +17,16 @@ public class CityServiceImpl implements CityService {
 
   @Override
   public void addCity(City city) {
+    city.setCityName(nameCorrect(city.getCityName()));
     cityRepository.saveAndFlush(city);
   }
 
   @Override
-  public void updateCity(City city) {
+  public void updateCityDescription(City city) {
+    city.setCityName(nameCorrect(city.getCityName()));
     City cityToUpdate = cityRepository.getByCityName(city.getCityName());
-    cityToUpdate.setCityName(city.getCityName());
     cityToUpdate.setCityDescription(city.getCityDescription());
-    cityRepository.save(cityToUpdate);
+    cityRepository.saveAndFlush(cityToUpdate);
   }
 
   @Override
@@ -35,5 +37,9 @@ public class CityServiceImpl implements CityService {
   @Override
   public City getCity(String cityName) {
     return cityRepository.getByCityName(cityName);
+  }
+
+  private String nameCorrect(String cityName) {
+    return StringUtils.capitalize(cityName.toLowerCase());
   }
 }

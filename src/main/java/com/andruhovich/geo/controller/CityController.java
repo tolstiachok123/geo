@@ -18,8 +18,8 @@ public class CityController {
   }
 
   @PostMapping
-  public void updateCity(@RequestBody City city) {
-    cityService.updateCity(city);
+  public void updateCityDescription(@RequestBody City city) {
+    cityService.updateCityDescription(city);
   }
 
   @DeleteMapping(value = "/{cityName}")
