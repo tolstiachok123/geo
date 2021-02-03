@@ -3,10 +3,10 @@ package com.andruhovich.geo.service.impl;
 import com.andruhovich.geo.model.City;
 import com.andruhovich.geo.repository.CityRepository;
 import com.andruhovich.geo.service.CityService;
-import com.sun.xml.internal.ws.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Service
 @Transactional
