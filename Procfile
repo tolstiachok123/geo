@@ -1,1 +1,1 @@
-web: java -jar out/geo.jar
+web: java -jar out/artifacts/geo_jar/geo.jar
